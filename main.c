@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct List_ {
   struct List_ *prev;
@@ -23,29 +24,16 @@ List *makeNum(List *num, int value) {
 }
 
 int main(void) {
-  List *num1, *tmp1, *num2, *tmp2;
+  char num1[] = "154789";
+  char num2[] = "243678";
 
-  List *uni1 = makeNode(8);
-  num1 = uni1;
-  num1 = makeNum(num1, 9);
-  tmp1 = num1;
+  printf("First number: %s\n", num1);
+  printf("Second number: %s\n", num2);
 
-  List *uni2 = makeNode(5);
-  num2 = uni2;
-  num2 = makeNum(num2, 4);
-  tmp2 = num2;
+  char newNumber[] = "";
 
-  printf("One: \n");
-  while (tmp1) {
-    printf("%d \n", tmp1->value);
-    tmp1 = tmp1->next;
+  for (int i=0; i < strlen(num1); i++) {
+    newNumber = num1[i];
+    printf("%s \n", newNumber);
   }
-
-  printf("Two: \n");
-  while (tmp2) {
-    printf("%d \n", tmp2->value);
-    tmp2 = tmp2->next;
-  }
-
-  printf("\n");
 }
