@@ -63,6 +63,20 @@ List *makeList(char number[]) {
   return num;
 }
 
+void printList(List *list) {
+  List *tmp;
+  tmp = list;
+  while(tmp) {
+    printf("%d", tmp->value);
+    tmp = tmp->next;
+
+    if (tmp != NULL) {
+      printf(" <-> ");
+    }
+  }
+  printf("\n");
+}
+
 int main(void) {
   char num1[] = "123456789";
   char num2[] = "243678";
@@ -70,14 +84,9 @@ int main(void) {
   printf("First number: %s\n", num1);
   printf("Second number: %s\n", num2);
 
-  List *number1, *number2, *tmp;
+  List *number1, *number2;
 
   number1 = makeList(num1);
 
-  tmp = number1;
-  while(tmp) {
-    printf("%d->", tmp->value);
-    tmp = tmp->next;
-  }
-  printf("\n");
+  printList(number1);
 }
