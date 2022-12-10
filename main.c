@@ -36,34 +36,48 @@ char* reverseString(char vet[]){
   return novo;
 }
 
-int main(void) {
-  char num1[] = "1123456789";
-  char num2[] = "243678";
-
-  printf("First number: %s\n", num1);
-  // printf("Second number: %s\n", num2);
-
+List *makeList(char number[]) {
   List *num, *tmp;
-
-  List *uni = makeNode(num1[strlen(num1) - 1]-'0');
-  num = uni;
-
+  List *uni = NULL;
+  
   char numberAux[4] = "";
-  for (int i=strlen(num1)-1; i >= 0; i--) {
+  for (int i=strlen(number)-1; i >= 0; i--) {
     if (strlen(numberAux) < 3) {
-      numberAux[strlen(numberAux)] = num1[i];
+      numberAux[strlen(numberAux)] = number[i];
     }
 
     if (strlen(numberAux) == 3 || i == 0) {
-      printf("- %s \n", reverseString(numberAux));
+      int newNumber = atoi(reverseString(numberAux));
+
+      if (uni == NULL) {
+        uni = makeNode(newNumber);  
+        num = uni;
+      } else {
+        num = makeNum(num, newNumber);
+      }
+
       memset(numberAux, 0, sizeof(numberAux));
     }
   }
 
-  // tmp = num;
-  // while(tmp) {
-  //   printf("%d->", tmp->value);
-  //   tmp = tmp->next;
-  // }
-  // printf("\n");
+  return num;
+}
+
+int main(void) {
+  char num1[] = "123456789";
+  char num2[] = "243678";
+
+  printf("First number: %s\n", num1);
+  printf("Second number: %s\n", num2);
+
+  List *number1, *number2, *tmp;
+
+  number1 = makeList(num1);
+
+  tmp = number1;
+  while(tmp) {
+    printf("%d->", tmp->value);
+    tmp = tmp->next;
+  }
+  printf("\n");
 }
