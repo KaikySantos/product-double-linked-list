@@ -24,29 +24,29 @@ List *makeNum(List *num, int value) {
 }
 
 char* reverseString(char vet[]){
-  int i, aux, fim, tam = strlen(vet);
-  char *novo = malloc((tam + 1) * sizeof(char));
+  int i, aux, end, length = strlen(vet);
+  char *new = malloc((length + 1) * sizeof(char));
 
-  fim = tam - 1; // índice do último caracter
-  for(i = 0; i < tam; i++){
-      novo[fim] = vet[i];
-      fim--;
+  end = length - 1;
+  for(i = 0; i < length; i++){
+      new[end] = vet[i];
+      end--;
   }
-  novo[i] = '\0'; // finaliza a nova string
-  return novo;
+  new[i] = '\0';
+  return new;
 }
 
 List *makeList(char number[]) {
   List *num, *tmp;
   List *uni = NULL;
   
-  char numberAux[4] = "";
+  char numberAux[2] = "";
   for (int i=strlen(number)-1; i >= 0; i--) {
-    if (strlen(numberAux) < 3) {
+    if (strlen(numberAux) < 1) {
       numberAux[strlen(numberAux)] = number[i];
     }
 
-    if (strlen(numberAux) == 3 || i == 0) {
+    if (strlen(numberAux) == 1 || i == 0) {
       int newNumber = atoi(reverseString(numberAux));
 
       if (uni == NULL) {
@@ -77,16 +77,42 @@ void printList(List *list) {
   printf("\n");
 }
 
+int multiplyTwoLists(List* list1, List* list2) {
+  int n1 = 0, n2 = 0;
+
+  while (list1 || list2) {
+    if (list1) {
+      n1 = list1->value + ((n1)*10);
+      list1 = list1->next;
+    }
+
+    if (list2) {
+      n2 = list2->value + ((n2)*10);
+      list2 = list2->next;
+    }
+  }
+
+  return n1 * n2;
+}
+
 int main(void) {
-  char num1[] = "123456789";
-  char num2[] = "243678";
+  char result[] = "";
+  char num1[] = "13";
+  char num2[] = "67";
 
-  printf("First number: %s\n", num1);
-  printf("Second number: %s\n", num2);
+  List *number1, *number2, *res;
 
-  List *number1, *number2;
-
+  printf("First number: ");
   number1 = makeList(num1);
-
   printList(number1);
+
+  printf("Second number: ");
+  number2 = makeList(num2);
+  printList(number2);
+
+  int product = multiplyTwoLists(number1, number2);
+  sprintf(result, "%d", product);
+  printf("Result: ");
+  res = makeList(result);
+  printList(res);
 }
