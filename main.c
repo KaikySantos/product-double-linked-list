@@ -71,7 +71,7 @@ void printList(List *list) {
     tmp = tmp->next;
 
     if (tmp != NULL) {
-      printf(" <-> ");
+      printf(" <> ");
     }
   }
   printf("\n");
@@ -80,16 +80,14 @@ void printList(List *list) {
 int multiplyTwoLists(List* list1, List* list2) {
   int n1 = 0, n2 = 0;
 
-  while (list1 || list2) {
-    if (list1) {
-      n1 = list1->value + ((n1)*10);
-      list1 = list1->next;
-    }
+  while (list1) {
+    n1 = list1->value + n1 * 10;
+    list1 = list1->next;
+  }
 
-    if (list2) {
-      n2 = list2->value + ((n2)*10);
-      list2 = list2->next;
-    }
+  while (list2) {
+    n2 = list2->value + n2 * 10;
+    list2 = list2->next;
   }
 
   return n1 * n2;
@@ -98,7 +96,7 @@ int multiplyTwoLists(List* list1, List* list2) {
 int main(void) {
   char result[] = "";
   char num1[] = "13";
-  char num2[] = "67";
+  char num2[] = "22";
 
   List *number1, *number2, *res;
 
